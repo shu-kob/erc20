@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.8.10;
 
 library SafeMath {
   function sub(uint256 a, uint256 b) internal pure returns (uint256) {
@@ -27,7 +27,7 @@ contract OrangebeamToken {
     mapping (address => uint256) balances;
     mapping (address => mapping (address => uint256)) internal allowed;
     
-    constructor() public {
+    constructor() {
         owner = msg.sender;
         balances[owner] = totalSupply;
     }
@@ -44,28 +44,4 @@ contract OrangebeamToken {
     function balanceOf(address _owner) public view returns (uint256 balance) {
         return balances[_owner];
     }
-}
-
-/**
- * @title Burnable Token
- * @dev Token that can be irreversibly burned (destroyed).
- */
-contract BurnableToken is OrangebeamToken {
-
-  event Burn(address indexed burner, uint256 value);
-
-  /**
-   * @dev Burns a specific amount of tokens.
-   * @param _value The amount of token to be burned.
-   */
-  function burn(uint256 _value) public {
-    require(_value <= balances[msg.sender]);
-    // no need to require value <= totalSupply, since that would imply the
-    // sender's balance is greater than the totalSupply, which *should* be an assertion failure
-
-    address burner = msg.sender;
-    balances[burner] = balances[burner].sub(_value);
-    totalSupply = totalSupply.sub(_value);
-    emit Burn(burner, _value);
-  }
 }
