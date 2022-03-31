@@ -3,14 +3,14 @@ pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract TokenFaucetContract {
+contract TokenVendingContract {
 
     ERC20 public ERC20Token;
     address payable public TokenOwner;
     uint256 private weiAmount;
     uint256 private weiBalance;
 
-    function TokenFaucet(address _ERC20Token, address payable _TokenOwner) public {
+    function TokenVending(address _ERC20Token, address payable _TokenOwner) public {
         ERC20Token = ERC20(_ERC20Token);
         TokenOwner = _TokenOwner;
     }
