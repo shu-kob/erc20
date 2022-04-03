@@ -28,7 +28,7 @@ contract TokenVendingContract {
     function withdrawEth(address payable _to, uint _value) public {
         require(msg.sender == TokenOwner, "Token owner only can withdrawal eth!");
         weiBalance = address(this).balance;
-        require(_value < weiBalance, "Withdrawal amount exceeds balance!");
+        require(_value <= weiBalance, "Withdrawal amount exceeds balance!");
 	    _to.transfer(_value);
 	}
 }
